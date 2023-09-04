@@ -89,6 +89,7 @@ public class Character : MonoBehaviour
         }
 
     }
+  
 
     private void ModifyTerrain(RaycastHit hit)
     {

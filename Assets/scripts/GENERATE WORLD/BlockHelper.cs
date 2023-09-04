@@ -14,6 +14,7 @@ public static class BlockHelper
         Direction.up
     };
 
+
     public static MeshData GetMeshData
         (ChunkData chunk, int x, int y, int z, MeshData meshData, BlockType blockType)
     {

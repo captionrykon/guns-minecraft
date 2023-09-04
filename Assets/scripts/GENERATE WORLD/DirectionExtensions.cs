@@ -15,5 +15,6 @@ public static class DirectionExtensions
             Direction.backwards => Vector3Int.back,
             _ => throw new Exception("Invalid input direction")
         };
+
     }
 }

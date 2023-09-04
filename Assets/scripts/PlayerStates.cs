@@ -26,13 +26,16 @@ public class PlayerStates : CharacterStats
         if (health <= 0)
         {
             health = 0;
-            
+            isDead = true;
+
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "enemyBullet")
         {
             TakeDamage(1);
-           
         }
     }
 }

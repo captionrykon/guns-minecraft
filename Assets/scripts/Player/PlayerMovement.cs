@@ -26,7 +26,10 @@ public class PlayerMovement : MonoBehaviour
     [field: SerializeField]
     public bool IsGrounded { get; private set; }
 
-
+    public Transform camTransform;
+    public Transform firePoint;
+    public GameObject bullet;
+    public GameObject muzzeleffect;
 
     private void Awake()
     {
@@ -87,10 +90,31 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, rayDistance, groundMask);
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(camTransform.position, camTransform.forward, out hit, 50f))
+            {
+                if (Vector3.Distance(camTransform.position, hit.point) > 2f)
+                {
+                    firePoint.LookAt(hit.point);
+                }
+            }
+            else
+            {
+                firePoint.LookAt(camTransform.position + (camTransform.forward * 30f));
+            }
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
+            Instantiate(muzzeleffect, firePoint.position, firePoint.rotation);
+        }
     }
+
+
+
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(transform.position, Vector3.down * rayDistance);
     }
+
 }
